@@ -2,6 +2,7 @@ package com.benedict.minibank.Services.dao;
 
 import com.benedict.minibank.Models.FoodType;
 import com.benedict.minibank.Models.Meal;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
@@ -74,8 +75,8 @@ public class MealDAO {
         }
     }
 
-    public ArrayList<Meal> getAllMeals() {
-        ArrayList<Meal> meals = new ArrayList<>();
+    public ObservableList<Meal> findAll() {
+        ObservableList<Meal> meals = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Meals";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql);
@@ -92,8 +93,8 @@ public class MealDAO {
                 System.out.println("Meal ID: " + id + ", Name: " + name +
                         ", Calories: " + calories + ", Protein: " + protein +
                         ", Carbs: " + carbs + ", Fats: " + fats);
-
-                meals.add(new Meal(id, null, null, -1, name, calories, protein, carbs, fats));
+                Meal temp = new Meal(id, null, null, name, calories, protein, carbs, fats);
+                meals.add(temp);
             }
 
         } catch (SQLException e) {
@@ -135,6 +136,25 @@ public class MealDAO {
 
         } catch (SQLException e) {
             System.out.println("ERROR GETTING MEALS WITH ITEMS: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM Meals WHERE id = ?";
+        String itemsSql = "DELETE FROM MealItems WHERE meal_id = ?";
+        try(PreparedStatement stmt = this.conn.prepareStatement(sql);
+            PreparedStatement itemStmt = this.conn.prepareStatement(itemsSql)) {
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+            itemStmt.setInt(1, id);
+            if(rowsAffected > 0){
+                System.out.println("Meal with id " + id +" was successfully deleted");
+            } else {
+                System.out.println("No Meal was found with id " + id);
+            };
+        } catch (SQLException e){
+            System.out.println("Error deleting Meal with id " + id);
             e.printStackTrace();
         }
     }

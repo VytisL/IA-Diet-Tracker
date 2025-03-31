@@ -73,7 +73,7 @@
                         <Label alignment="CENTER" layoutY="399.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Meals" textFill="WHITE" />
                         <Label alignment="CENTER" layoutY="76.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Food types" textFill="WHITE" />
                         <Button fx:id="add_meal_into_day_two_btn" layoutX="572.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Add meal to day" wrapText="true" />
-                        <TableView fx:id="meal_table" layoutX="1.0" layoutY="422.0" prefHeight="300.0" prefWidth="850.0">
+                        <TableView fx:id="meals_table" layoutX="1.0" layoutY="422.0" prefHeight="300.0" prefWidth="850.0">
                            <columns>
                               <TableColumn fx:id="meals_col_name" prefWidth="200.0" text="Meal" />
                               <TableColumn fx:id="meals_col_calories" prefWidth="162.5" text="Calories" />
@@ -84,7 +84,7 @@
                            <contextMenu>
                               <ContextMenu>
                                  <items>
-                                    <MenuItem fx:id="delete_foodType_btn1" mnemonicParsing="false" text="Delete Food Type" />
+                                    <MenuItem fx:id="delete_meal_btn" mnemonicParsing="false" text="Delete Meal" />
                                  </items>
                               </ContextMenu>
                            </contextMenu>

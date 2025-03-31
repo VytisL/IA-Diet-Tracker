@@ -120,12 +120,14 @@ public class Model {
     }
 
     //Meals
+    public ObservableList<Meal> getMeals(){return mealDAO.findAll(); }
     public void createMeal(String name, ObservableList<FoodType> foodTypes, ObservableList<Double> portions){
         mealDAO.create(name, foodTypes, portions);
     }
 
-    public ArrayList<Meal> getMeals(){return  mealDAO.getAllMeals();}
-
+    public void deleteMeal(int id){
+        mealDAO.delete(id);
+    }
     public void getMealsWithDetails(){mealDAO.getAllMealsWithItems();}
 
 

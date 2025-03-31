@@ -28,6 +28,15 @@ public class Meal extends Food{
         this.carbs = new SimpleDoubleProperty(carbs);
         this.fats = new SimpleDoubleProperty(fats);
     }
+
+    public Meal(int id, String name, double calories, double protein, double carbs, double fats) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.calories = new SimpleDoubleProperty(calories);
+        this.protein = new SimpleDoubleProperty(protein);
+        this.carbs = new SimpleDoubleProperty(carbs);
+        this.fats = new SimpleDoubleProperty(fats);
+    }
 }
 
 

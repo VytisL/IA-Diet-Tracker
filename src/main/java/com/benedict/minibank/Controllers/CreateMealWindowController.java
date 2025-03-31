@@ -2,6 +2,7 @@ package com.benedict.minibank.Controllers;
 
 import com.benedict.minibank.Models.FoodItem;
 import com.benedict.minibank.Models.FoodType;
+import com.benedict.minibank.Models.Meal;
 import com.benedict.minibank.Models.Model;
 import com.benedict.minibank.Utilities.AlertUtility;
 import com.benedict.minibank.Views.MenuOptions;
@@ -33,6 +34,8 @@ public class CreateMealWindowController implements Initializable {
     public TextField meal_name_field;
     @FXML
     public Button save_meal_item_btn;
+    @FXML
+    public MenuItem delete_meal_item_btn;
 
     //Add functionality to remove items from this table
     @FXML
@@ -49,6 +52,7 @@ public class CreateMealWindowController implements Initializable {
         cancel_btn.setOnAction(event -> onCancel());
         create_meal_btn.setOnAction(event -> onCreateMeal());
         save_meal_item_btn.setOnAction(event -> onAddMealItem());
+        delete_meal_item_btn.setOnAction(event -> onDeleteMealItem());
         loadFoodTypeData();
         meal_select_food_type_box.setConverter(new StringConverter<FoodType>() {
             @Override
@@ -65,10 +69,8 @@ public class CreateMealWindowController implements Initializable {
     }
 
     private void initItemsTableColumns() {
-
     meal_items_col_type.setCellValueFactory(cellData -> cellData.getValue().getFoodType().nameProperty());
     meal_items_col_portion.setCellValueFactory(cellData -> cellData.getValue().portionProperty().asString());
-
     }
 
     public void onCancel() {
@@ -83,6 +85,14 @@ public class CreateMealWindowController implements Initializable {
             AlertUtility.displayError("Selection is null");
             emptyFields();
         } else{
+            try {
+                Double.parseDouble(meal_portion_field.getText());
+            } catch (Exception e) {
+                AlertUtility.displayError("Portion must be purely numeric");
+                emptyFields();
+                return;
+            }
+
             SimpleObjectProperty<FoodType> foodType = new SimpleObjectProperty(meal_select_food_type_box.getValue());
             System.out.println(foodType.getName());
             double portion = Double.parseDouble(meal_portion_field.getText());
@@ -98,10 +108,18 @@ public class CreateMealWindowController implements Initializable {
         meal_select_food_type_box.setItems(foodTypes);
     }
 
+    private void onDeleteMealItem() {
+        //converts to Meal
+        FoodItem selectedMealItem = (FoodItem) meal_items_table.getSelectionModel().getSelectedItem();
+        foodItems.remove(selectedMealItem);
+        meal_items_table.setItems(foodItems);
+    }
+
     private void emptyFields(){
         meal_select_food_type_box.setValue(null);
         meal_portion_field.setText(null);
     }
+
     public void onCreateMeal() {
 
         if(meal_name_field.getText()==null || foodItems.isEmpty()){
@@ -115,11 +133,11 @@ public class CreateMealWindowController implements Initializable {
                 foodTypes.add(foodItems.get(i).getFoodType());
                 portions.add(foodItems.get(i).getPortion());
             }
-
             Model.getInstance().createMeal(name, foodTypes, portions);
-
+            onCancel();
         }
 
     }
+
 }
 

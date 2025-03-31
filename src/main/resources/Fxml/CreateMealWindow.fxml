@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.benedict.minibank.Controllers.CreateMealWindowController">
    <children>
@@ -34,6 +36,13 @@
             <TableColumn fx:id="meal_items_col_type" prefWidth="300.0" text="Food Type" />
             <TableColumn fx:id="meal_items_col_portion" prefWidth="300.0" text="Portion" />
          </columns>
+         <contextMenu>
+            <ContextMenu>
+               <items>
+                  <MenuItem fx:id="delete_meal_item_btn" mnemonicParsing="false" text="Delete Meal Item" />
+               </items>
+            </ContextMenu>
+         </contextMenu>
       </TableView>
       <HBox layoutY="82.0" prefHeight="27.0" prefWidth="600.0" spacing="90.0">
          <children>

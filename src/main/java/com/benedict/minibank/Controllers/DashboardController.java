@@ -175,6 +175,7 @@ public class DashboardController implements Initializable {
             rowM.setOnMouseClicked(event ->{
                 if(event.getClickCount() == 2 && (!rowM.isEmpty())){
                     Meal selectedMeal = rowM.getItem();
+                    //Not quite sure how to approach editing meals
                     //editFoodType(Meal);
                 }
             });

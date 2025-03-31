@@ -75,6 +75,32 @@ public class MealDAO {
         }
     }
 
+    public void update(Meal meal) {
+
+        String sql = "UPDATE Meals SET name = ?, calories = ?, protein = ?, carbs = ?, fats = ? WHERE id = ?";
+
+        try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
+            stmt.setString(1, meal.getName());
+            stmt.setDouble(2, meal.getCalories());
+            stmt.setDouble(3, meal.getProtein());
+            stmt.setDouble(4, meal.getCarbs());
+            stmt.setDouble(5, meal.getFats());
+            stmt.setInt(6, meal.getId());
+
+            int rowsUpdated = stmt.executeUpdate();
+
+            if(rowsUpdated > 0){
+                System.out.println("Meal updated: " + meal);
+            }else{
+                System.out.println("No Meal found with id: " + meal.getId());
+            }
+        }catch (SQLException e){
+            System.out.println("Error updating Meal: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
     public ObservableList<Meal> findAll() {
         ObservableList<Meal> meals = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Meals";
@@ -90,10 +116,7 @@ public class MealDAO {
                 double carbs = rs.getDouble("carbs");
                 double fats = rs.getDouble("fats");
 
-                System.out.println("Meal ID: " + id + ", Name: " + name +
-                        ", Calories: " + calories + ", Protein: " + protein +
-                        ", Carbs: " + carbs + ", Fats: " + fats);
-                Meal temp = new Meal(id, null, null, name, calories, protein, carbs, fats);
+                Meal temp = new Meal(id, name, calories, protein, carbs, fats);
                 meals.add(temp);
             }
 
@@ -145,9 +168,11 @@ public class MealDAO {
         String itemsSql = "DELETE FROM MealItems WHERE meal_id = ?";
         try(PreparedStatement stmt = this.conn.prepareStatement(sql);
             PreparedStatement itemStmt = this.conn.prepareStatement(itemsSql)) {
+            itemStmt.setInt(1, id);
+            itemStmt.executeUpdate();
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
-            itemStmt.setInt(1, id);
+
             if(rowsAffected > 0){
                 System.out.println("Meal with id " + id +" was successfully deleted");
             } else {

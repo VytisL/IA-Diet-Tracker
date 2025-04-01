@@ -7,11 +7,11 @@ module com.benedict.minibank {
     requires java.desktop;
 
 
-    opens com.benedict.minibank to javafx.fxml;
-    opens com.benedict.minibank.Controllers to javafx.fxml;
-    exports com.benedict.minibank;
-    exports com.benedict.minibank.Controllers;
-    exports com.benedict.minibank.Models;
-    exports com.benedict.minibank.Views;
-    exports com.benedict.minibank.Services.dao;
+    opens com.benedict.DietTracker to javafx.fxml;
+    opens com.benedict.DietTracker.Controllers to javafx.fxml;
+    exports com.benedict.DietTracker;
+    exports com.benedict.DietTracker.Controllers;
+    exports com.benedict.DietTracker.Models;
+    exports com.benedict.DietTracker.Views;
+    exports com.benedict.DietTracker.Services.dao;
 }

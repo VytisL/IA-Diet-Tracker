@@ -21,13 +21,11 @@
                      <children>
                         <TableView fx:id="items_table" layoutY="110.0" prefHeight="575.0" prefWidth="850.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                           <columns>
-                            <TableColumn prefWidth="149.0" text="Item" />
-                              <TableColumn prefWidth="120.0" text="Calories" />
-                              <TableColumn prefWidth="120.0" text="Protein" />
-                              <TableColumn prefWidth="100.0" text="Carbohydrates" />
-                              <TableColumn prefWidth="120.0" text="Fats" />
-                              <TableColumn prefWidth="120.0" text="Edit" />
-                              <TableColumn prefWidth="120.0" text="Remove" />
+                            <TableColumn prefWidth="170.0" text="Item" />
+                              <TableColumn prefWidth="170.0" text="Calories" />
+                              <TableColumn prefWidth="170.0" text="Protein" />
+                              <TableColumn prefWidth="170.0" text="Carbohydrates" />
+                              <TableColumn prefWidth="170.0" text="Fats" />
                           </columns>
                         </TableView>
                         <Button fx:id="add_food_into_day_one_btn" layoutX="314.0" layoutY="69.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add food item" AnchorPane.rightAnchor="441.0" />
@@ -40,9 +38,10 @@
                               <Label text="TotFat" />
                            </children>
                         </HBox>
-                        <Label layoutY="44.0" prefHeight="25.0" prefWidth="95.0" text="Date:" AnchorPane.leftAnchor="0.0" />
+                        <Label layoutY="44.0" prefHeight="25.0" prefWidth="31.0" text="Date:" AnchorPane.leftAnchor="0.0" />
                         <Button layoutY="69.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Change date" AnchorPane.rightAnchor="755.0" />
                         <Button fx:id="add_meal_into_day_one_btn" layoutX="432.0" layoutY="69.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add meal" />
+                        <Label fx:id="date_label" layoutX="32.0" layoutY="44.0" prefHeight="25.0" prefWidth="62.0" />
                      </children>
                   </AnchorPane>
             </content>

@@ -82,12 +82,7 @@ public class DashboardController implements Initializable {
         loadFoodTypeData();
 
         initMealsTableColumns();
-        setRowFactoryForMealsTable();
         loadMealData();
-        //Just for test
-        Model.getInstance().getMeals();
-        System.out.println("And now meals with details: ");
-        Model.getInstance().getMealsWithDetails();
     }
 
 
@@ -169,19 +164,7 @@ public class DashboardController implements Initializable {
         meals_col_fats.setCellValueFactory(new PropertyValueFactory<>("fats"));
     }
 
-    private void setRowFactoryForMealsTable() {
-        meals_table.setRowFactory(tv -> {
-            TableRow<Meal> rowM = new TableRow<>();
-            rowM.setOnMouseClicked(event ->{
-                if(event.getClickCount() == 2 && (!rowM.isEmpty())){
-                    Meal selectedMeal = rowM.getItem();
-                    //Not quite sure how to approach editing meals
-                    //editFoodType(Meal);
-                }
-            });
-            return rowM;
-        });
-    }
+
 
     private void onDeleteMeal() {
         //converts to Meal

@@ -3,12 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.benedict.DietTracker.Controllers.AddMealIntoDayController">
    <children>
-      <Button alignment="CENTER" layoutX="200.0" layoutY="319.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="144.0" style="-fx-background-color: #006600;" text="Add meal" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Button fx:id="add_meal_btn" alignment="CENTER" layoutX="200.0" layoutY="319.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="144.0" style="-fx-background-color: #006600;" text="Add meal" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="18.0" />
          </font>
@@ -23,6 +24,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <ComboBox layoutX="60.0" layoutY="67.0" prefHeight="54.0" prefWidth="239.0" promptText="Select meal" />
+      <ComboBox fx:id="meal_comboBox" layoutX="60.0" layoutY="67.0" prefHeight="54.0" prefWidth="239.0" promptText="Select meal" />
+      <TextField fx:id="date_field" layoutX="60.0" layoutY="146.0" prefHeight="54.0" prefWidth="239.0" promptText="Enter date YYYY-MM-DD" />
    </children>
 </Pane>

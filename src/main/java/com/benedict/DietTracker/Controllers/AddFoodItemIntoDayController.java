@@ -24,6 +24,8 @@ public class AddFoodItemIntoDayController implements Initializable {
     public TextField portion_field;
     @FXML
     public Button add_food_item_btn;
+    @FXML
+    public TextField date_field;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,14 +52,22 @@ public class AddFoodItemIntoDayController implements Initializable {
     }
 
     private void onFoodItem(){
-        //This will create duplicate FoodItems in the DB each time a user wants to add a FoodItem. Fix later.
-        FoodType foodType = food_type_combo_box.getValue();
-        double portion = Double.parseDouble(portion_field.getText());
-        Model.getInstance().createFoodItem(foodType, portion);
-        AlertUtility.displayConfirmation("Food Item created successfuly");
-        emptyFields();
+        if(food_type_combo_box.getValue()==null || portion_field.getText()==null || portion_field.getText().trim().isEmpty() ||
+        date_field.getText()==null || date_field.getText().trim().isEmpty()) {
+            AlertUtility.displayError("Please select valid data");
+        } else {
+            FoodType foodType = food_type_combo_box.getValue();
+            double portion = Double.parseDouble(portion_field.getText());
+            if(!Model.getInstance().foodItemExists(foodType, portion)){
+                Model.getInstance().createFoodItem(foodType, portion);
+            }
+            int id = Model.getInstance().foodItemId(foodType, portion);
+            String date = date_field.getText().trim();
+            Model.getInstance().createDay(date, -1, id);
+            AlertUtility.displayConfirmation("Food Item Added successfuly");
+            emptyFields();
+        }
 
-        //Add the part where this is added to the day table.
     }
 
     private void loadFoodTypeData(){
@@ -68,5 +78,6 @@ public class AddFoodItemIntoDayController implements Initializable {
     private void emptyFields() {
         portion_field.setText(null);
         food_type_combo_box.setValue(null);
+        date_field.setText(null);
     }
 }

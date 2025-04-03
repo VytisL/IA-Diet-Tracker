@@ -36,37 +36,39 @@ public class FoodItemDAO {
         }
     }
 
-    public ObservableList<FoodItem> findAll() {
-        ObservableList<FoodItem> foodItems = FXCollections.observableArrayList();
-        String sql = "SELECT id, portion, foodTypeId, name, calories, protein, carbs, fats FROM FoodTypes";
+    //Deepseek sita parase
+    public boolean exists(FoodType foodType, double portion) {
+        if (foodType == null) return false;
 
-        try(PreparedStatement stmt = this.conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()) {
+        String sql = "SELECT EXISTS(SELECT 1 FROM FoodItems WHERE name = ? LIMIT 1)";
 
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String portion = rs.getString("portion");
-                int foodTypeId = rs.getInt("foodTypeId");
-                String name = rs.getString("name");
-                String calories = rs.getString("calories");
-                String protein = rs.getString("protein");
-                String carbs = rs.getString("carbs");
-                String fats = rs.getString("fats");
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            String name = foodType.getName() + ", " + portion + "g";
+            pstmt.setString(1, name);
 
-
-                FoodItem foodItem = new FoodItem(id, Double.parseDouble(portion), foodTypeId, name, Double.parseDouble(calories), Double.parseDouble(protein), Double.parseDouble(carbs), Double.parseDouble(fats));
-                foodItems.add(foodItem);
-
-                System.out.printf("Fetched FoodType: %s %s (%s, %s)%n", name, calories, protein, carbs, fats);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next() && rs.getInt(1) == 1;
             }
-
         } catch (SQLException e) {
-            System.out.println("ERROR FETCHING FoodTypes: " + e.getMessage());
-            e.printStackTrace();
+            System.err.println("Error checking FoodItem existence: " + e.getMessage());
+            return false;
         }
-
-        return foodItems;
     }
 
+    //Deepseek sita parase
+    public int findFoodItemId(FoodType foodType, double portion) {
+        if (foodType == null) return -1;
 
+        String name = foodType.getName() + ", " + portion + "g";
+        String sql = "SELECT id FROM FoodItems WHERE name = ? LIMIT 1";
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next() ? rs.getInt("id") : -1;
+        } catch (SQLException e) {
+            System.err.println("Error finding FoodItem ID: " + e.getMessage());
+            return -1;
+        }
+    }
 }

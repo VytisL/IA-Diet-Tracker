@@ -15,8 +15,8 @@ public class Model {
     public final FoodTypeDAO foodTypeDAO;
     public final FoodItemDAO foodItemDAO;
     public final MealDAO mealDAO;
+    public final DayDAO dayDAO;
     private boolean loginSuccessFlag;
-    private final ObservableList<Author> authors;
     private final ObservableList<FoodType> foodTypes;
     private  User currentUser;
 
@@ -28,9 +28,9 @@ public class Model {
         this.foodTypeDAO = new FoodTypeDAO(new DatabaseDriver().getConnection());
         this.foodItemDAO = new FoodItemDAO(new DatabaseDriver().getConnection());
         this.mealDAO = new MealDAO(new DatabaseDriver().getConnection());
+        this.dayDAO = new DayDAO(new DatabaseDriver().getConnection());
         this.loginSuccessFlag = false;
         this.currentUser = null;
-        this.authors = FXCollections.observableArrayList();
         this.foodTypes = FXCollections.observableArrayList();
     }
 
@@ -98,9 +98,14 @@ public class Model {
     }
 
     //FoodItems
-
     public void createFoodItem(FoodType foodType, double portion){
         foodItemDAO.create(foodType, portion);
+    }
+    public boolean foodItemExists(FoodType foodType, double portion){
+        return foodItemDAO.exists(foodType, portion);
+    }
+    public int foodItemId(FoodType foodType, double portion){
+        return foodItemDAO.findFoodItemId(foodType, portion);
     }
 
     //Meals
@@ -114,5 +119,9 @@ public class Model {
     }
     public void getMealsWithDetails(){mealDAO.getAllMealsWithItems();}
 
+    //Days
+    public void createDay(String date, int meal_id, int foodItem_id){
+        dayDAO.create(date, meal_id, foodItem_id);
+    }
 
 }

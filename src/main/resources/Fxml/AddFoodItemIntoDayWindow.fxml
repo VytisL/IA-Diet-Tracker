@@ -26,5 +26,6 @@
       </Button>
       <ComboBox fx:id="food_type_combo_box" layoutX="60.0" layoutY="74.0" prefHeight="54.0" prefWidth="239.0" promptText="Select food type" />
       <TextField fx:id="portion_field" layoutX="60.0" layoutY="146.0" prefHeight="54.0" prefWidth="239.0" promptText="Enter portion (g)" />
+      <TextField fx:id="date_field" layoutX="60.0" layoutY="219.0" prefHeight="54.0" prefWidth="239.0" promptText="Enter date YYYY-MM-DD" />
    </children>
 </Pane>

@@ -29,13 +29,9 @@ public class MenuController implements Initializable {
 
 
     private void addListeners(){
-        authors_btn.setOnAction(event->onAuthor());
         logout_btn.setOnAction(event->onLogout());
     }
 
-    private void onAuthor(){
-        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(MenuOptions.AUTHORS);
-    }
 
 
 

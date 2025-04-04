@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.benedict.DietTracker.Controllers.DashboardController">
    <children>
@@ -35,7 +36,7 @@
                         <Button fx:id="change_date_btn" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Change date" AnchorPane.rightAnchor="658.0" />
                         <Button fx:id="add_meal_into_day_one_btn" layoutX="432.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add meal" />
                         <Label alignment="CENTER" layoutY="77.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Meals" textFill="WHITE" />
-                        <TableView fx:id="day_items_table" layoutY="410.0" prefHeight="287.0" prefWidth="850.0">
+                        <TableView fx:id="day_items_table" layoutY="410.0" prefHeight="286.0" prefWidth="850.0">
                            <columns>
                               <TableColumn fx:id="day_item_col" prefWidth="170.0" text="Food Item" />
                               <TableColumn fx:id="day_item_cal_col" prefWidth="170.0" text="Calories" />
@@ -45,7 +46,10 @@
                            </columns>
                         </TableView>
                         <Label alignment="CENTER" layoutY="387.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Food Items" textFill="WHITE" />
-                        <Label fx:id="total_label" layoutY="697.0" prefHeight="24.0" prefWidth="332.0" text="Label" />
+                        <Label fx:id="total_label" layoutY="694.0" prefHeight="24.0" prefWidth="332.0" text="Totals:">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Label>
                         <HBox alignment="CENTER_LEFT" layoutX="32.0" layoutY="14.0" prefHeight="26.0" prefWidth="162.0">
                            <children>
                               <TextField fx:id="year_field" prefHeight="25.0" prefWidth="50.0" promptText="YYYY" />

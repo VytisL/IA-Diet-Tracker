@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.benedict.DietTracker.Controllers.DashboardController">
    <children>
@@ -30,11 +31,9 @@
                         </TableView>
                         <Button fx:id="add_food_into_day_one_btn" layoutX="314.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add food item" AnchorPane.rightAnchor="441.0" />
                         <Label layoutY="14.0" prefHeight="25.0" prefWidth="31.0" text="Date:" AnchorPane.leftAnchor="0.0" />
-                        <Button fx:id="change_date_btn" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="178.0" text="Change date" AnchorPane.rightAnchor="672.0" />
+                        <Button fx:id="change_date_btn" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="192.0" text="Change date" AnchorPane.rightAnchor="658.0" />
                         <Button fx:id="add_meal_into_day_one_btn" layoutX="432.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add meal" />
-                        <Label fx:id="date_label" layoutX="32.0" layoutY="44.0" prefHeight="25.0" prefWidth="62.0" />
                         <Label alignment="CENTER" layoutY="77.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Meals" textFill="WHITE" />
-                        <TextField fx:id="date_textField" layoutX="31.0" layoutY="14.0" />
                         <TableView fx:id="day_items_table" layoutY="410.0" prefHeight="287.0" prefWidth="850.0">
                            <columns>
                               <TableColumn fx:id="day_item_col" prefWidth="170.0" text="Food Item" />
@@ -44,8 +43,17 @@
                               <TableColumn fx:id="day_item_fats_col" prefWidth="170.0" text="Fats" />
                            </columns>
                         </TableView>
-                        <Label alignment="CENTER" layoutX="7.0" layoutY="387.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Food Items" textFill="WHITE" />
+                        <Label alignment="CENTER" layoutY="387.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Food Items" textFill="WHITE" />
                         <Label fx:id="total_label" layoutY="697.0" prefHeight="24.0" prefWidth="332.0" text="Label" />
+                        <HBox alignment="CENTER_LEFT" layoutX="32.0" layoutY="14.0" prefHeight="26.0" prefWidth="162.0">
+                           <children>
+                              <TextField fx:id="year_field" prefHeight="25.0" prefWidth="50.0" promptText="YYYY" />
+                              <Label text="-" />
+                              <TextField fx:id="month_field" prefHeight="25.0" prefWidth="50.0" promptText="MM" />
+                              <Label text="-" />
+                              <TextField fx:id="day_field" prefHeight="25.0" prefWidth="50.0" promptText="DD" />
+                           </children>
+                        </HBox>
                      </children>
                   </AnchorPane>
             </content>

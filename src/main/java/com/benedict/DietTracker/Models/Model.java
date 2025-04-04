@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Model {
     private static Model model;
@@ -122,6 +123,12 @@ public class Model {
     //Days
     public void createDay(String date, int meal_id, int foodItem_id){
         dayDAO.create(date, meal_id, foodItem_id);
+    }
+    public ArrayList<Integer> dayMealIds(String date){
+        return dayDAO.findMeals(date);
+    }
+    public ArrayList<Integer> dayFoodItemIds(String date){
+        return dayDAO.findFoodItems(date);
     }
 
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
@@ -54,6 +55,8 @@
                               <TextField fx:id="day_field" prefHeight="25.0" prefWidth="50.0" promptText="DD" />
                            </children>
                         </HBox>
+                        <ComboBox fx:id="day_sort_comboBox" layoutX="646.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" promptText="Sort by:" />
+                        <Button fx:id="day_sort_btn" layoutX="765.0" layoutY="40.0" mnemonicParsing="false" text="Sort" />
                      </children>
                   </AnchorPane>
             </content>
@@ -62,8 +65,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="add_food_type_btn" layoutX="144.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add food type" />
-                        <Button fx:id="add_food_into_day_two_btn" layoutX="249.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Add food item to day" wrapText="true" />
+                        <Button fx:id="add_food_type_btn" layoutX="36.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add food type" />
+                        <Button fx:id="add_food_into_day_two_btn" layoutX="141.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Add food item to day" wrapText="true" />
                         <TableView fx:id="food_types_table" layoutX="1.0" layoutY="99.0" prefHeight="300.0" prefWidth="850.0">
                            <columns>
                               <TableColumn fx:id="types_col_name" prefWidth="200.0" text="Item" />
@@ -80,10 +83,10 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
-                        <Button fx:id="create_meal_btn" layoutX="470.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add meal" />
+                        <Button fx:id="create_meal_btn" layoutX="362.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" text="Add meal" />
                         <Label alignment="CENTER" layoutY="399.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Meals" textFill="WHITE" />
                         <Label alignment="CENTER" layoutY="76.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Food types" textFill="WHITE" />
-                        <Button fx:id="add_meal_into_day_two_btn" layoutX="572.0" layoutY="39.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Add meal to day" wrapText="true" />
+                        <Button fx:id="add_meal_into_day_two_btn" layoutX="464.0" layoutY="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Add meal to day" wrapText="true" />
                         <TableView fx:id="meals_table" layoutX="1.0" layoutY="422.0" prefHeight="300.0" prefWidth="850.0">
                            <columns>
                               <TableColumn fx:id="meals_col_name" prefWidth="200.0" text="Meal" />
@@ -100,6 +103,8 @@
                               </ContextMenu>
                            </contextMenu>
                         </TableView>
+                        <ComboBox fx:id="sort_comboBox" layoutX="646.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" promptText="Sort by:" />
+                        <Button fx:id="sort_btn" layoutX="765.0" layoutY="40.0" mnemonicParsing="false" text="Sort" />
                      </children>
                   </AnchorPane>
             </content>

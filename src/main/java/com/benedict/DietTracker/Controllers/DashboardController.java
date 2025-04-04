@@ -6,6 +6,7 @@ import com.benedict.DietTracker.Models.Model;
 import com.benedict.DietTracker.Utilities.AlertUtility;
 import com.benedict.DietTracker.Utilities.DialogUtility;
 import com.benedict.DietTracker.Views.MenuOptions;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -30,6 +32,10 @@ public class DashboardController implements Initializable {
     public Button add_meal_into_day_one_btn;
     @FXML
     public Button add_meal_into_day_two_btn;
+    @FXML
+    public Button sort_btn;
+    @FXML
+    public ComboBox<String> sort_comboBox;
 
     //FoodType
     @FXML
@@ -76,6 +82,9 @@ public class DashboardController implements Initializable {
         add_meal_into_day_two_btn.setOnAction(event -> onAddMealIntoDay());
         delete_foodType_btn.setOnAction(event -> onDeleteFoodType());
         delete_meal_btn.setOnAction(event -> onDeleteMeal());
+        sort_btn.setOnAction(event -> onSort());
+
+        setSortComboBoxValues();
 
         initTypesTableColumns();
         setRowFactoryForFoodTypesTable();
@@ -100,7 +109,10 @@ public class DashboardController implements Initializable {
     }
 
 
-
+    private void setSortComboBoxValues(){
+        ObservableList<String> options = FXCollections.observableArrayList("Name", "Calories", "Protein", "Carbs", "Fats");
+        sort_comboBox.setItems(options);
+    }
 
     //FoodTypes table
 
@@ -186,6 +198,53 @@ public class DashboardController implements Initializable {
         ObservableList<Meal> meals = Model.getInstance().getMeals();
         meals_table.setItems(meals);
     }
+
+    private void onSort() {
+        if(sort_comboBox.getValue()==null){
+            AlertUtility.displayError("Select what to sort by first");
+        } else {
+            ObservableList<Meal> meals = meals_table.getItems();
+            ObservableList<FoodType> foodTypes = food_types_table.getItems();
+
+            String choice = sort_comboBox.getValue();
+            switch (choice){
+                case "Default":
+                    meals = Model.getInstance().getMeals();
+                    foodTypes = Model.getInstance().getFoodTypes();
+                    break;
+                case "Name":
+                    FXCollections.sort(meals, Comparator.comparing(Meal::getName).reversed());
+                    FXCollections.sort(foodTypes, Comparator.comparing(FoodType::getName).reversed());
+                    break;
+
+                case "Calories":
+                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getCalories).reversed());
+                    FXCollections.sort(foodTypes, Comparator.comparingDouble(FoodType::getCalories).reversed());
+                    break;
+                case "Protein":
+                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getProtein).reversed());
+                    FXCollections.sort(foodTypes, Comparator.comparingDouble(FoodType::getProtein).reversed());
+                    break;
+                case "Carbs":
+                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getCarbs).reversed());
+                    FXCollections.sort(foodTypes, Comparator.comparingDouble(FoodType::getCarbs).reversed());
+                    break;
+                case "Fats":
+                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getFats).reversed());
+                    FXCollections.sort(foodTypes, Comparator.comparingDouble(FoodType::getFats).reversed());
+                    break;
+                default:
+                    meals = Model.getInstance().getMeals();
+                    foodTypes = Model.getInstance().getFoodTypes();
+                    break;
+            }
+
+            meals_table.setItems(meals);
+            food_types_table.setItems(foodTypes);
+        }
+    }
+
+
 
 
 

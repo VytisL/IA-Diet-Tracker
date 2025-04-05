@@ -2,6 +2,7 @@ package com.benedict.DietTracker.Services.dao;
 
 import com.benedict.DietTracker.Models.FoodItem;
 import com.benedict.DietTracker.Models.FoodType;
+import com.benedict.DietTracker.Models.Meal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FoodItemDAO {
     private Connection conn;
@@ -36,7 +38,7 @@ public class FoodItemDAO {
         }
     }
 
-    //Deepseek sita parase
+
     public boolean exists(FoodType foodType, double portion) {
         if (foodType == null) return false;
 
@@ -55,7 +57,7 @@ public class FoodItemDAO {
         }
     }
 
-    //Deepseek sita parase
+
     public int findFoodItemId(FoodType foodType, double portion) {
         if (foodType == null) return -1;
 
@@ -71,4 +73,35 @@ public class FoodItemDAO {
             return -1;
         }
     }
+
+    public ObservableList<FoodItem> getIdFoodItems(ArrayList<Integer> foodItemIds) {
+        ObservableList<FoodItem> foodItems = FXCollections.observableArrayList();
+
+        for (int id : foodItemIds) {
+            String sql = "SELECT portion, foodTypeId, name, calories, protein, carbs, fats FROM FoodItems WHERE id = ?";
+
+            try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        Double portion = rs.getDouble("portion");
+                        Integer foodTypeId = rs.getInt("foodTypeId");
+                        String name = rs.getString("name");
+                        Double calories = rs.getDouble("calories");
+                        Double protein = rs.getDouble("protein");
+                        Double carbs = rs.getDouble("carbs");
+                        Double fats = rs.getDouble("fats");
+                        foodItems.add(new FoodItem(id, portion, foodTypeId, name, calories, protein, carbs, fats));
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println("ERROR FETCHING FOODITEMS: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+        return foodItems;
+    }
+
+
 }

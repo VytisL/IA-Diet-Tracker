@@ -108,9 +108,15 @@ public class Model {
     public int foodItemId(FoodType foodType, double portion){
         return foodItemDAO.findFoodItemId(foodType, portion);
     }
+    public ObservableList<FoodItem> getIdFoodItems(ArrayList<Integer> foodItemIds){
+        return foodItemDAO.getIdFoodItems(foodItemIds);
+    }
 
     //Meals
     public ObservableList<Meal> getMeals(){return mealDAO.findAll(); }
+    public ObservableList<Meal> getIdMeals(ArrayList<Integer> mealIds){
+        return mealDAO.getIdMeals(mealIds);
+    }
     public void createMeal(String name, ObservableList<FoodType> foodTypes, ObservableList<Double> portions){
         mealDAO.create(name, foodTypes, portions);
     }
@@ -119,6 +125,7 @@ public class Model {
         mealDAO.delete(id);
     }
     public void getMealsWithDetails(){mealDAO.getAllMealsWithItems();}
+
 
     //Days
     public void createDay(String date, int meal_id, int foodItem_id){
@@ -130,5 +137,12 @@ public class Model {
     public ArrayList<Integer> dayFoodItemIds(String date){
         return dayDAO.findFoodItems(date);
     }
+    public void removeMealFromDay(int meal_id){
+        dayDAO.removeMealFromDay(meal_id);
+    }
+    public void removeFoodItemFromDay(int foodItem_id){
+        dayDAO.removeFoodItemFromDay(foodItem_id);
+    }
+
 
 }

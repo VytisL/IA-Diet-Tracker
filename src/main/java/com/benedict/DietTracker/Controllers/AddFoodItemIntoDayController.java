@@ -56,16 +56,20 @@ public class AddFoodItemIntoDayController implements Initializable {
         date_field.getText()==null || date_field.getText().trim().isEmpty()) {
             AlertUtility.displayError("Please select valid data");
         } else {
-            FoodType foodType = food_type_combo_box.getValue();
-            double portion = Double.parseDouble(portion_field.getText());
-            if(!Model.getInstance().foodItemExists(foodType, portion)){
-                Model.getInstance().createFoodItem(foodType, portion);
+            try {
+                FoodType foodType = food_type_combo_box.getValue();
+                double portion = Double.parseDouble(portion_field.getText());
+                if (!Model.getInstance().foodItemExists(foodType, portion)) {
+                    Model.getInstance().createFoodItem(foodType, portion);
+                }
+                int id = Model.getInstance().foodItemId(foodType, portion);
+                String date = date_field.getText().trim();
+                Model.getInstance().createDay(date, -1, id);
+                AlertUtility.displayConfirmation("Food Item Added successfuly");
+                emptyFields();
+            } catch (Exception e) {
+                AlertUtility.displayError("Invalid data");
             }
-            int id = Model.getInstance().foodItemId(foodType, portion);
-            String date = date_field.getText().trim();
-            Model.getInstance().createDay(date, -1, id);
-            AlertUtility.displayConfirmation("Food Item Added successfuly");
-            emptyFields();
         }
 
     }

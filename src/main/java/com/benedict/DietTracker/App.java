@@ -10,11 +10,10 @@ public class App extends Application {
 
     @Override
     public void start( Stage stage){
-        //Model.getInstance().getViewFactory().showLoginWindow();
         if (Model.getInstance().hasRegisteredUsers()){
             Model.getInstance().getViewFactory().showLoginWindow();
         } else {
-            AlertUtility.displayInformation("Prieš pradedant darbą su sistema turite užregistruoti bent vieną vartotoją");
+            AlertUtility.displayInformation("You must register at least one user");
             Model.getInstance().getViewFactory().showRegisterWindow();
 
         }

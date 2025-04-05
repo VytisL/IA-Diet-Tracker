@@ -90,4 +90,39 @@ public class DayDAO {
         }
     }
 
+    public void removeMealFromDay(int meal_id) {
+        String sql = "DELETE FROM Days WHERE ROWID IN " +
+                "(SELECT ROWID FROM Days WHERE meal_id = ? LIMIT 1)";
+        try(PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+            stmt.setInt(1, meal_id);
+            int rowsAffected = stmt.executeUpdate();
+
+            if(rowsAffected > 0){
+                System.out.println("Meal successfully removed from Day");
+            } else {
+                System.out.println("No Meal was found with id " + meal_id);
+            }
+        } catch (SQLException e){
+            System.out.println("Error removing Meal from day with id " + meal_id);
+            e.printStackTrace();
+        }
+    }
+
+    public void removeFoodItemFromDay(int foodItem_id) {
+        String sql = "DELETE FROM Days WHERE foodItem_id = ? ORDER BY ROWID LIMIT 1";
+        try(PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+            stmt.setInt(1, foodItem_id);
+            int rowsAffected = stmt.executeUpdate();
+
+            if(rowsAffected > 0){
+                System.out.println("FoodItem successfully remove from Day");
+            } else {
+                System.out.println("No FoodItem was found with id " + foodItem_id);
+            };
+        } catch (SQLException e){
+            System.out.println("Error removing FoodItem from day with id " + foodItem_id);
+            e.printStackTrace();
+        }
+    }
+
 }

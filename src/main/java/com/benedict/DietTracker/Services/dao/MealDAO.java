@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MealDAO {
 
@@ -74,32 +75,6 @@ public class MealDAO {
         }
     }
 
-    public void update(Meal meal) {
-
-        String sql = "UPDATE Meals SET name = ?, calories = ?, protein = ?, carbs = ?, fats = ? WHERE id = ?";
-
-        try(PreparedStatement stmt = this.conn.prepareStatement(sql)){
-            stmt.setString(1, meal.getName());
-            stmt.setDouble(2, meal.getCalories());
-            stmt.setDouble(3, meal.getProtein());
-            stmt.setDouble(4, meal.getCarbs());
-            stmt.setDouble(5, meal.getFats());
-            stmt.setInt(6, meal.getId());
-
-            int rowsUpdated = stmt.executeUpdate();
-
-            if(rowsUpdated > 0){
-                System.out.println("Meal updated: " + meal);
-            }else{
-                System.out.println("No Meal found with id: " + meal.getId());
-            }
-        }catch (SQLException e){
-            System.out.println("Error updating Meal: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-
     public ObservableList<Meal> findAll() {
         ObservableList<Meal> meals = FXCollections.observableArrayList();
         String sql = "SELECT * FROM Meals";
@@ -160,6 +135,34 @@ public class MealDAO {
             System.out.println("ERROR GETTING MEALS WITH ITEMS: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public ObservableList<Meal> getIdMeals(ArrayList<Integer> mealIds) {
+        ObservableList<Meal> meals = FXCollections.observableArrayList();
+
+        for (int id : mealIds) {
+            String sql = "SELECT name, calories, protein, carbs, fats FROM Meals WHERE id = ?";
+
+            try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+                stmt.setInt(1, id);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        String name = rs.getString("name");
+                        Double calories = rs.getDouble("calories");
+                        Double protein = rs.getDouble("protein");
+                        Double carbs = rs.getDouble("carbs");
+                        Double fats = rs.getDouble("fats");
+
+                        // Forces a new object even if ID is the same
+                        meals.add(new Meal(id, name, calories, protein, carbs, fats));
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("ERROR FETCHING MEAL ID " + id + ": " + e.getMessage());
+            }
+        }
+        return meals;
     }
 
     public void delete(int id) {

@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0"
-            xmlns="http://javafx.com/javafx/23"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.benedict.DietTracker.Controllers.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.benedict.DietTracker.Controllers.DashboardController">
     <children>
         <TabPane prefHeight="750.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -17,53 +23,72 @@
                             <children>
                                 <TableView fx:id="day_meals_table" layoutY="100.0" prefHeight="287.0" prefWidth="850.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                     <columns>
-                                        <TableColumn fx:id="day_meal_col" prefWidth="170.0" text="Meal"/>
-                                        <TableColumn fx:id="day_meal_cal_col" prefWidth="170.0" text="Calories"/>
-                                        <TableColumn fx:id="day_meal_protein_col" prefWidth="170.0" text="Protein"/>
-                                        <TableColumn fx:id="day_meal_carbs_col" prefWidth="170.0" text="Carbohydrates"/>
-                                        <TableColumn fx:id="day_meal_fats_col" prefWidth="170.0" text="Fats"/>
+                                        <TableColumn fx:id="day_meal_col" prefWidth="170.0" text="Meal" />
+                                        <TableColumn fx:id="day_meal_cal_col" prefWidth="170.0" text="Calories" />
+                                        <TableColumn fx:id="day_meal_protein_col" prefWidth="170.0" text="Protein" />
+                                        <TableColumn fx:id="day_meal_carbs_col" prefWidth="170.0" text="Carbohydrates" />
+                                        <TableColumn fx:id="day_meal_fats_col" prefWidth="170.0" text="Fats" />
                                     </columns>
                                     <contextMenu>
                                         <ContextMenu>
                                             <items>
-                                                <MenuItem fx:id="delete_meal_day_btn" text="Unspecified Action"/>
+                                                <MenuItem fx:id="delete_meal_day_btn" text="Unspecified Action" />
                                             </items>
                                         </ContextMenu>
                                     </contextMenu>
                                 </TableView>
 
-                                <Label layoutY="14.0" prefHeight="25.0" prefWidth="31.0" text="Date:" AnchorPane.leftAnchor="0.0"/>
-                                <DatePicker fx:id="date_picker" layoutX="32.0" layoutY="14.0" prefHeight="25.0" prefWidth="162.0"/>
-                                <Button fx:id="change_date_btn" layoutY="40.0" prefHeight="25.0" prefWidth="192.0" text="Change date" AnchorPane.rightAnchor="658.0"/>
-                                <Button fx:id="add_food_into_day_one_btn" layoutX="314.0" layoutY="39.0" prefHeight="25.0" prefWidth="95.0" text="Add food item" AnchorPane.rightAnchor="441.0"/>
-                                <Button fx:id="add_meal_into_day_one_btn" layoutX="432.0" layoutY="39.0" prefHeight="25.0" prefWidth="95.0" text="Add meal"/>
-                                <Label alignment="CENTER" layoutY="77.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Meals" textFill="WHITE"/>
+                                <Label layoutY="14.0" prefHeight="25.0" prefWidth="31.0" text="Date:" AnchorPane.leftAnchor="0.0" />
+                                <DatePicker fx:id="date_picker" layoutX="32.0" layoutY="14.0" prefHeight="25.0" prefWidth="162.0" />
+                                <Button fx:id="change_date_btn" layoutY="40.0" prefHeight="25.0" prefWidth="192.0" text="Change date" AnchorPane.rightAnchor="658.0" />
+                                <Button fx:id="add_food_into_day_one_btn" layoutX="314.0" layoutY="39.0" prefHeight="25.0" prefWidth="95.0" text="Add food item" AnchorPane.rightAnchor="441.0" />
+                                <Button fx:id="add_meal_into_day_one_btn" layoutX="432.0" layoutY="39.0" prefHeight="25.0" prefWidth="95.0" text="Add meal" />
+                                <Label alignment="CENTER" layoutY="77.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Meals" textFill="WHITE" />
 
                                 <TableView fx:id="day_items_table" layoutY="410.0" prefHeight="286.0" prefWidth="850.0">
                                     <columns>
-                                        <TableColumn fx:id="day_item_col" prefWidth="170.0" text="Food Item"/>
-                                        <TableColumn fx:id="day_item_cal_col" prefWidth="170.0" text="Calories"/>
-                                        <TableColumn fx:id="day_item_protein_col" prefWidth="170.0" text="Protein"/>
-                                        <TableColumn fx:id="day_item_carbs_col" prefWidth="170.0" text="Carbohydrates"/>
-                                        <TableColumn fx:id="day_item_fats_col" prefWidth="170.0" text="Fats"/>
+                                        <TableColumn fx:id="day_item_col" prefWidth="170.0" text="Food Item" />
+                                        <TableColumn fx:id="day_item_cal_col" prefWidth="170.0" text="Calories" />
+                                        <TableColumn fx:id="day_item_protein_col" prefWidth="170.0" text="Protein" />
+                                        <TableColumn fx:id="day_item_carbs_col" prefWidth="170.0" text="Carbohydrates" />
+                                        <TableColumn fx:id="day_item_fats_col" prefWidth="170.0" text="Fats" />
                                     </columns>
                                     <contextMenu>
                                         <ContextMenu>
                                             <items>
-                                                <MenuItem fx:id="delete_item_day_btn" text="Unspecified Action"/>
+                                                <MenuItem fx:id="delete_item_day_btn" text="Unspecified Action" />
                                             </items>
                                         </ContextMenu>
                                     </contextMenu>
                                 </TableView>
 
-                                <Label alignment="CENTER" layoutY="387.0" prefHeight="23.0" prefWidth="850.0"
-                                       style="-fx-background-color: #006600;" text="Food Items" textFill="WHITE"/>
-                                <Label fx:id="total_label" layoutY="694.0" prefHeight="24.0" prefWidth="332.0" text="Totals:">
-                                    <font><Font size="18.0"/></font>
+                                <Label alignment="CENTER" layoutY="387.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Food Items" textFill="WHITE" />
+                                <Label layoutY="694.0" prefHeight="27.0" prefWidth="170.0" text="Total:">
+                                    <font><Font size="18.0" /></font>
                                 </Label>
 
-                                <ComboBox fx:id="day_sort_comboBox" layoutX="646.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" promptText="Sort by:"/>
-                                <Button fx:id="day_sort_btn" layoutX="765.0" layoutY="40.0" text="Sort"/>
+                                <ComboBox fx:id="day_sort_comboBox" layoutX="646.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" promptText="Sort by:" />
+                                <Button fx:id="day_sort_btn" layoutX="765.0" layoutY="40.0" text="Sort" />
+                        <Label fx:id="tot_cal" layoutX="170.0" layoutY="694.0" prefHeight="27.0" prefWidth="170.0" text="Calories:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="tot_protein" layoutX="340.0" layoutY="694.0" prefHeight="27.0" prefWidth="170.0" text="Protein: ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="tot_carbs" layoutX="510.0" layoutY="694.0" prefHeight="27.0" prefWidth="170.0" text="Carbs: ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="tot_fats" layoutX="680.0" layoutY="694.0" prefHeight="27.0" prefWidth="170.0" text="Fats: ">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                             </children>
                         </AnchorPane>
                     </content>
@@ -73,48 +98,46 @@
                     <content>
                         <AnchorPane>
                             <children>
-                                <Button fx:id="add_food_type_btn" layoutX="36.0" layoutY="40.0" prefHeight="25.0" prefWidth="95.0" text="Add food type"/>
-                                <Button fx:id="add_food_into_day_two_btn" layoutX="141.0" layoutY="40.0" prefHeight="25.0" prefWidth="135.0" text="Add food item to day"/>
-                                <Button fx:id="create_meal_btn" layoutX="362.0" layoutY="40.0" prefHeight="25.0" prefWidth="95.0" text="Add meal"/>
-                                <Button fx:id="add_meal_into_day_two_btn" layoutX="464.0" layoutY="40.0" prefHeight="25.0" prefWidth="135.0" text="Add meal to day"/>
-                                <ComboBox fx:id="sort_comboBox" layoutX="646.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" promptText="Sort by:"/>
-                                <Button fx:id="sort_btn" layoutX="765.0" layoutY="40.0" text="Sort"/>
+                                <Button fx:id="add_food_type_btn" layoutX="36.0" layoutY="40.0" prefHeight="25.0" prefWidth="95.0" text="Add food type" />
+                                <Button fx:id="add_food_into_day_two_btn" layoutX="141.0" layoutY="40.0" prefHeight="25.0" prefWidth="135.0" text="Add food item to day" />
+                                <Button fx:id="create_meal_btn" layoutX="362.0" layoutY="40.0" prefHeight="25.0" prefWidth="95.0" text="Add meal" />
+                                <Button fx:id="add_meal_into_day_two_btn" layoutX="464.0" layoutY="40.0" prefHeight="25.0" prefWidth="135.0" text="Add meal to day" />
+                                <ComboBox fx:id="sort_comboBox" layoutX="646.0" layoutY="40.0" prefHeight="25.0" prefWidth="107.0" promptText="Sort by:" />
+                                <Button fx:id="sort_btn" layoutX="765.0" layoutY="40.0" text="Sort" />
 
                                 <TableView fx:id="food_types_table" layoutY="99.0" prefHeight="300.0" prefWidth="850.0">
                                     <columns>
-                                        <TableColumn fx:id="types_col_name" prefWidth="200.0" text="Item"/>
-                                        <TableColumn fx:id="types_col_calories" prefWidth="162.5" text="Calories"/>
-                                        <TableColumn fx:id="types_col_protein" prefWidth="162.5" text="Protein"/>
-                                        <TableColumn fx:id="types_col_carbs" prefWidth="162.5" text="Carbohydrates"/>
-                                        <TableColumn fx:id="types_col_fats" prefWidth="162.5" text="Fats"/>
+                                        <TableColumn fx:id="types_col_name" prefWidth="200.0" text="Item" />
+                                        <TableColumn fx:id="types_col_calories" prefWidth="162.5" text="Calories" />
+                                        <TableColumn fx:id="types_col_protein" prefWidth="162.5" text="Protein" />
+                                        <TableColumn fx:id="types_col_carbs" prefWidth="162.5" text="Carbohydrates" />
+                                        <TableColumn fx:id="types_col_fats" prefWidth="162.5" text="Fats" />
                                     </columns>
                                     <contextMenu>
                                         <ContextMenu>
                                             <items>
-                                                <MenuItem fx:id="delete_foodType_btn" text="Delete Food Type"/>
+                                                <MenuItem fx:id="delete_foodType_btn" text="Delete Food Type" />
                                             </items>
                                         </ContextMenu>
                                     </contextMenu>
                                 </TableView>
 
-                                <Label alignment="CENTER" layoutY="76.0" prefHeight="23.0" prefWidth="850.0"
-                                       style="-fx-background-color: #006600;" text="Food types" textFill="WHITE"/>
+                                <Label alignment="CENTER" layoutY="76.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Food types" textFill="WHITE" />
 
-                                <Label alignment="CENTER" layoutY="399.0" prefHeight="23.0" prefWidth="850.0"
-                                       style="-fx-background-color: #006600;" text="Meals" textFill="WHITE"/>
+                                <Label alignment="CENTER" layoutY="399.0" prefHeight="23.0" prefWidth="850.0" style="-fx-background-color: #006600;" text="Meals" textFill="WHITE" />
 
                                 <TableView fx:id="meals_table" layoutY="422.0" prefHeight="300.0" prefWidth="850.0">
                                     <columns>
-                                        <TableColumn fx:id="meals_col_name" prefWidth="200.0" text="Meal"/>
-                                        <TableColumn fx:id="meals_col_calories" prefWidth="162.5" text="Calories"/>
-                                        <TableColumn fx:id="meals_col_protein" prefWidth="162.5" text="Protein"/>
-                                        <TableColumn fx:id="meals_col_carbs" prefWidth="162.5" text="Carbohydrates"/>
-                                        <TableColumn fx:id="meals_col_fats" prefWidth="162.5" text="Fats"/>
+                                        <TableColumn fx:id="meals_col_name" prefWidth="200.0" text="Meal" />
+                                        <TableColumn fx:id="meals_col_calories" prefWidth="162.5" text="Calories" />
+                                        <TableColumn fx:id="meals_col_protein" prefWidth="162.5" text="Protein" />
+                                        <TableColumn fx:id="meals_col_carbs" prefWidth="162.5" text="Carbohydrates" />
+                                        <TableColumn fx:id="meals_col_fats" prefWidth="162.5" text="Fats" />
                                     </columns>
                                     <contextMenu>
                                         <ContextMenu>
                                             <items>
-                                                <MenuItem fx:id="delete_meal_btn" text="Delete Meal"/>
+                                                <MenuItem fx:id="delete_meal_btn" text="Delete Meal" />
                                             </items>
                                         </ContextMenu>
                                     </contextMenu>

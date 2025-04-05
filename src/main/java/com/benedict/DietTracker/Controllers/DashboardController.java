@@ -70,6 +70,12 @@ public class DashboardController implements Initializable {
     @FXML private TableColumn<FoodItem, String> day_item_fats_col;
     @FXML private MenuItem delete_item_day_btn;
 
+    @FXML private Label tot_cal;
+    @FXML private Label tot_protein;
+    @FXML private Label tot_carbs;
+    @FXML private Label tot_fats;
+
+
     private String date = "";
 
     @Override
@@ -225,6 +231,7 @@ public class DashboardController implements Initializable {
     public void loadDayMealData() {
         ObservableList<Meal> dayMeals = Model.getInstance().getIdMeals(Model.getInstance().dayMealIds(date));
         day_meals_table.setItems(dayMeals);
+        updateTotals();
     }
 
     private void initDayItemsTableColumns() {
@@ -238,6 +245,7 @@ public class DashboardController implements Initializable {
     public void loadDayFoodItemData() {
         ObservableList<FoodItem> dayItems = Model.getInstance().getIdFoodItems(Model.getInstance().dayFoodItemIds(date));
         day_items_table.setItems(dayItems);
+        updateTotals();
     }
 
     private void onDeleteDayMeal() {
@@ -301,5 +309,38 @@ public class DashboardController implements Initializable {
             case "Fats" -> Comparator.comparingDouble(FoodItem::getFats).reversed();
             default -> (a, b) -> 0;
         };
+    }
+
+    private void updateTotals(){
+        double totCals = 0;
+        double totProtein = 0;
+        double totCarbs = 0;
+        double totFats = 0;
+
+        if(day_meals_table.getItems()!=null) {
+            ObservableList<Meal> totMeals = day_meals_table.getItems();
+
+            for (int i = 0; i < totMeals.size(); i++) {
+                totCals += totMeals.get(i).getCalories();
+                totProtein += totMeals.get(i).getProtein();
+                totCarbs += totMeals.get(i).getCarbs();
+                totFats += totMeals.get(i).getFats();
+            }
+
+        }
+        if(day_items_table.getItems()!=null) {
+            ObservableList<FoodItem> totFoodItems = day_items_table.getItems();
+            for (int i = 0; i < totFoodItems.size(); i++) {
+                totCals += totFoodItems.get(i).getCalories();
+                totProtein += totFoodItems.get(i).getProtein();
+                totCarbs += totFoodItems.get(i).getCarbs();
+                totFats += totFoodItems.get(i).getFats();
+            }
+        }
+
+        tot_cal.setText("Calories: " + totCals);
+        tot_protein.setText("Protein: " + totProtein);
+        tot_carbs.setText("Carbs: " + totCarbs);
+        tot_fats.setText("Fats: " + totFats);
     }
 }

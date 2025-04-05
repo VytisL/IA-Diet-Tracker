@@ -117,7 +117,7 @@ public class ViewFactory {
         stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/Images/icon.png"))));
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.setTitle("Benedikto knygynas");
+        stage.setTitle("DietTracker");
         stage.show();
     }
 

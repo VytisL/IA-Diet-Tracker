@@ -15,109 +15,62 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
-    @FXML
-    public Button add_food_type_btn;
-    @FXML
-    public Button add_food_into_day_one_btn;
-    @FXML
-    public Button add_food_into_day_two_btn;
-    @FXML
-    public Button create_meal_btn;
-    @FXML
-    public Button add_meal_into_day_one_btn;
-    @FXML
-    public Button add_meal_into_day_two_btn;
+    @FXML private Button add_food_type_btn;
+    @FXML private Button add_food_into_day_one_btn;
+    @FXML private Button add_food_into_day_two_btn;
+    @FXML private Button create_meal_btn;
+    @FXML private Button add_meal_into_day_one_btn;
+    @FXML private Button add_meal_into_day_two_btn;
 
-    @FXML
-    public Button sort_btn;
-    @FXML
-    public ComboBox<String> sort_comboBox;
+    @FXML private Button sort_btn;
+    @FXML private ComboBox<String> sort_comboBox;
 
-    @FXML
-    public ComboBox<String> day_sort_comboBox;
-    @FXML
-    public Button day_sort_btn;
+    @FXML private ComboBox<String> day_sort_comboBox;
+    @FXML private Button day_sort_btn;
 
-    @FXML
-    public TextField year_field;
-    @FXML
-    public TextField month_field;
-    @FXML
-    public TextField day_field;
-    @FXML
-    public Button change_date_btn;
+    @FXML private DatePicker date_picker;
+    @FXML private Button change_date_btn;
 
-    //FoodType
-    @FXML
-    public TableView<FoodType> food_types_table;
-    @FXML
-    public TableColumn<FoodType, String> types_col_name;
-    @FXML
-    public TableColumn<FoodType, String> types_col_calories;
-    @FXML
-    public TableColumn<FoodType, String> types_col_protein;
-    @FXML
-    public TableColumn<FoodType, String> types_col_carbs;
-    @FXML
-    public TableColumn<FoodType, String> types_col_fats;
-    @FXML
-    public MenuItem delete_foodType_btn;
+    @FXML private TableView<FoodType> food_types_table;
+    @FXML private TableColumn<FoodType, String> types_col_name;
+    @FXML private TableColumn<FoodType, String> types_col_calories;
+    @FXML private TableColumn<FoodType, String> types_col_protein;
+    @FXML private TableColumn<FoodType, String> types_col_carbs;
+    @FXML private TableColumn<FoodType, String> types_col_fats;
+    @FXML private MenuItem delete_foodType_btn;
 
-    //Meal
-    @FXML
-    public TableView<Meal> meals_table;
-    @FXML
-    public TableColumn<Meal, String> meals_col_name;
-    @FXML
-    public TableColumn<Meal, String> meals_col_calories;
-    @FXML
-    public TableColumn<Meal, String> meals_col_protein;
-    @FXML
-    public TableColumn<Meal, String> meals_col_carbs;
-    @FXML
-    public TableColumn<Meal, String> meals_col_fats;
-    @FXML
-    public MenuItem delete_meal_btn;
+    @FXML private TableView<Meal> meals_table;
+    @FXML private TableColumn<Meal, String> meals_col_name;
+    @FXML private TableColumn<Meal, String> meals_col_calories;
+    @FXML private TableColumn<Meal, String> meals_col_protein;
+    @FXML private TableColumn<Meal, String> meals_col_carbs;
+    @FXML private TableColumn<Meal, String> meals_col_fats;
+    @FXML private MenuItem delete_meal_btn;
 
-    //Day Meal
-    @FXML
-    public TableView<Meal> day_meals_table;
-    @FXML
-    public TableColumn<Meal, String> day_meal_col;
-    @FXML
-    public TableColumn<Meal, String> day_meal_cal_col;
-    @FXML
-    public TableColumn<Meal, String> day_meal_protein_col;
-    @FXML
-    public TableColumn<Meal, String> day_meal_carbs_col;
-    @FXML
-    public TableColumn<Meal, String> day_meal_fats_col;
-    @FXML
-    public MenuItem delete_meal_day_btn;
+    @FXML private TableView<Meal> day_meals_table;
+    @FXML private TableColumn<Meal, String> day_meal_col;
+    @FXML private TableColumn<Meal, String> day_meal_cal_col;
+    @FXML private TableColumn<Meal, String> day_meal_protein_col;
+    @FXML private TableColumn<Meal, String> day_meal_carbs_col;
+    @FXML private TableColumn<Meal, String> day_meal_fats_col;
+    @FXML private MenuItem delete_meal_day_btn;
 
-    //Day FoodItem
-    @FXML
-    public TableView<FoodItem> day_items_table;
-    @FXML
-    public TableColumn<FoodItem, String> day_item_col;
-    @FXML
-    public TableColumn<FoodItem, String> day_item_cal_col;
-    @FXML
-    public TableColumn<FoodItem, String> day_item_protein_col;
-    @FXML
-    public TableColumn<FoodItem, String> day_item_carbs_col;
-    @FXML
-    public TableColumn<FoodItem, String> day_item_fats_col;
-    @FXML
-    public MenuItem delete_item_day_btn;
+    @FXML private TableView<FoodItem> day_items_table;
+    @FXML private TableColumn<FoodItem, String> day_item_col;
+    @FXML private TableColumn<FoodItem, String> day_item_cal_col;
+    @FXML private TableColumn<FoodItem, String> day_item_protein_col;
+    @FXML private TableColumn<FoodItem, String> day_item_carbs_col;
+    @FXML private TableColumn<FoodItem, String> day_item_fats_col;
+    @FXML private MenuItem delete_item_day_btn;
 
-
+    private String date = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -131,42 +84,35 @@ public class DashboardController implements Initializable {
         delete_meal_btn.setOnAction(event -> onDeleteMeal());
         sort_btn.setOnAction(event -> onSort());
         day_sort_btn.setOnAction(event -> onDaySort());
-
         delete_meal_day_btn.setOnAction(event -> onDeleteDayMeal());
         delete_item_day_btn.setOnAction(event -> onDeleteDayItem());
-
         change_date_btn.setOnAction(event -> onChangeDate());
 
         setSortComboBoxValues();
-
         initTypesTableColumns();
         setRowFactoryForFoodTypesTable();
         loadFoodTypeData();
-
         initMealsTableColumns();
         loadMealData();
-
         initDayMealsTableColumns();
         initDayItemsTableColumns();
     }
 
-
-    //==================================
-    //Food and Meal tab
-    //==================================
     private void onAddFoodType() {
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(MenuOptions.ADD_FOOD_TYPE);
     }
+
     private void onAddFoodIntoDay() {
-      Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(MenuOptions.ADD_FOOD_ITEM_INTO_DAY);
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(MenuOptions.ADD_FOOD_ITEM_INTO_DAY);
     }
+
     private void onCreateMeal() {
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(MenuOptions.CREATE_MEAL);
     }
+
     private void onAddMealIntoDay() {
         Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(MenuOptions.ADD_MEAL_INTO_DAY);
     }
-
 
     private void setSortComboBoxValues(){
         ObservableList<String> options = FXCollections.observableArrayList("Name", "Calories", "Protein", "Carbs", "Fats");
@@ -174,13 +120,10 @@ public class DashboardController implements Initializable {
         day_sort_comboBox.setItems(options);
     }
 
-    //FoodTypes table
-
     private void editFoodType(FoodType foodType) {
         Optional<FoodType> result = DialogUtility.showEditFoodTypeDialog(foodType);
         result.ifPresent(updateFoodType -> {
             Model.getInstance().updateFoodType(foodType);
-            System.out.println("Update result");
         });
     }
 
@@ -194,14 +137,14 @@ public class DashboardController implements Initializable {
 
     private void setRowFactoryForFoodTypesTable() {
         food_types_table.setRowFactory(tv -> {
-           TableRow<FoodType> row = new TableRow<>();
-           row.setOnMouseClicked(event ->{
-               if(event.getClickCount() == 2 && (!row.isEmpty())){
-                   FoodType selectedFoodType = row.getItem();
-                   editFoodType(selectedFoodType);
-               }
-           });
-           return row;
+            TableRow<FoodType> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    FoodType selectedFoodType = row.getItem();
+                    editFoodType(selectedFoodType);
+                }
+            });
+            return row;
         });
     }
 
@@ -211,22 +154,18 @@ public class DashboardController implements Initializable {
     }
 
     private void onDeleteFoodType() {
-                                    //converts to FoodType
-        FoodType selectedFoodType = (FoodType) food_types_table.getSelectionModel().getSelectedItem();
-        if(selectedFoodType == null){
+        FoodType selectedFoodType = food_types_table.getSelectionModel().getSelectedItem();
+        if (selectedFoodType == null) {
             AlertUtility.displayError("Error selecting FoodType");
+            return;
         }
         boolean confirmed = AlertUtility.displayConfirmation("Are you sure you want to delete this Food Type?");
-        if(confirmed){
+        if (confirmed) {
             Model.getInstance().deleteFoodType(selectedFoodType.getId());
-            ObservableList<FoodType> foodTypes = food_types_table.getItems();
-            foodTypes.remove(selectedFoodType);
+            food_types_table.getItems().remove(selectedFoodType);
             AlertUtility.displayConfirmation("FoodType deleted successfully");
         }
-
     }
-
-    //meals table
 
     private void initMealsTableColumns() {
         meals_col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -236,87 +175,44 @@ public class DashboardController implements Initializable {
         meals_col_fats.setCellValueFactory(new PropertyValueFactory<>("fats"));
     }
 
-
-
     private void onDeleteMeal() {
-        //converts to Meal
-        Meal selectedMeal = (Meal) meals_table.getSelectionModel().getSelectedItem();
-        if(selectedMeal == null){
+        Meal selectedMeal = meals_table.getSelectionModel().getSelectedItem();
+        if (selectedMeal == null) {
             AlertUtility.displayError("Error selecting Meal");
+            return;
         }
         boolean confirmed = AlertUtility.displayConfirmation("Are you sure you want to delete this Meal?");
-        if(confirmed){
+        if (confirmed) {
             Model.getInstance().deleteMeal(selectedMeal.getId());
-            ObservableList<Meal> meals = meals_table.getItems();
-            meals.remove(selectedMeal);
-            AlertUtility.displayConfirmation("FoodType deleted successfully");
+            meals_table.getItems().remove(selectedMeal);
+            AlertUtility.displayConfirmation("Meal deleted successfully");
         }
-
     }
 
     private void loadMealData() {
-        ObservableList<Meal> meals = Model.getInstance().getMeals();
-        meals_table.setItems(meals);
+        meals_table.setItems(Model.getInstance().getMeals());
     }
-
-
 
     private void onSort() {
-        if(sort_comboBox.getValue()==null){
+        if (sort_comboBox.getValue() == null) {
             AlertUtility.displayError("Select what to sort by first");
-        } else {
-            ObservableList<Meal> meals = meals_table.getItems();
-            ObservableList<FoodType> foodTypes = food_types_table.getItems();
-
-            String choice = sort_comboBox.getValue();
-            switch (choice){
-                case "Name":
-                    FXCollections.sort(meals, Comparator.comparing(Meal::getName).reversed());
-                    FXCollections.sort(foodTypes, Comparator.comparing(FoodType::getName).reversed());
-                    break;
-                case "Calories":
-                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getCalories).reversed());
-                    FXCollections.sort(foodTypes, Comparator.comparingDouble(FoodType::getCalories).reversed());
-                    break;
-                case "Protein":
-                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getProtein).reversed());
-                    FXCollections.sort(foodTypes, Comparator.comparingDouble(FoodType::getProtein).reversed());
-                    break;
-                case "Carbs":
-                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getCarbs).reversed());
-                    FXCollections.sort(foodTypes, Comparator.comparingDouble(FoodType::getCarbs).reversed());
-                    break;
-                case "Fats":
-                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getFats).reversed());
-                    FXCollections.sort(foodTypes, Comparator.comparingDouble(FoodType::getFats).reversed());
-                    break;
-                default:
-                    meals = Model.getInstance().getMeals();
-                    foodTypes = Model.getInstance().getFoodTypes();
-                    break;
-            }
-
-            meals_table.setItems(meals);
-            food_types_table.setItems(foodTypes);
+            return;
         }
+        String choice = sort_comboBox.getValue();
+        FXCollections.sort(meals_table.getItems(), getMealComparator(choice));
+        FXCollections.sort(food_types_table.getItems(), getFoodTypeComparator(choice));
     }
 
-    //==================================
-    //Day tab
-    //==================================
-
-    String date = "";
     private void onChangeDate(){
-        String year = year_field.getText();
-        String month = month_field.getText();
-        String day = day_field.getText();
-
-        date = year+"-"+month+"-"+day;
-
+        LocalDate selectedDate = date_picker.getValue();
+        if (selectedDate == null) {
+            AlertUtility.displayError("Please select a date.");
+            return;
+        }
+        date = selectedDate.toString();
         loadDayMealData();
         loadDayFoodItemData();
     }
-
 
     private void initDayMealsTableColumns() {
         day_meal_col.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -330,7 +226,6 @@ public class DashboardController implements Initializable {
         ObservableList<Meal> dayMeals = Model.getInstance().getIdMeals(Model.getInstance().dayMealIds(date));
         day_meals_table.setItems(dayMeals);
     }
-
 
     private void initDayItemsTableColumns() {
         day_item_col.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -346,68 +241,65 @@ public class DashboardController implements Initializable {
     }
 
     private void onDeleteDayMeal() {
-
-        Meal selectedMeal = (Meal) day_meals_table.getSelectionModel().getSelectedItem();
-        if(selectedMeal == null){
+        Meal selectedMeal = day_meals_table.getSelectionModel().getSelectedItem();
+        if (selectedMeal == null) {
             AlertUtility.displayError("Error selecting Meal");
-        } else {
-            Model.getInstance().removeMealFromDay(selectedMeal.getId());
-            loadDayMealData();
+            return;
         }
-
+        Model.getInstance().removeMealFromDay(selectedMeal.getId());
+        loadDayMealData();
     }
 
     private void onDeleteDayItem() {
-
-        FoodItem selectedItem = (FoodItem) day_items_table.getSelectionModel().getSelectedItem();
-        if(selectedItem == null){
+        FoodItem selectedItem = day_items_table.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
             AlertUtility.displayError("Error selecting FoodItem");
-        } else {
-            Model.getInstance().removeFoodItemFromDay(selectedItem.getId());
-            loadDayFoodItemData();
+            return;
         }
-
+        Model.getInstance().removeFoodItemFromDay(selectedItem.getId());
+        loadDayFoodItemData();
     }
 
     private void onDaySort() {
-        if(day_sort_comboBox.getValue()==null){
+        if (day_sort_comboBox.getValue() == null) {
             AlertUtility.displayError("Select what to sort by first");
-        } else {
-            ObservableList<Meal> meals = day_meals_table.getItems();
-            ObservableList<FoodItem> foodItems = day_items_table.getItems();
-
-            String choice = day_sort_comboBox.getValue();
-            switch (choice){
-                case "Name":
-                    FXCollections.sort(meals, Comparator.comparing(Meal::getName).reversed());
-                    FXCollections.sort(foodItems, Comparator.comparing(FoodItem::getName).reversed());
-                    break;
-                case "Calories":
-                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getCalories).reversed());
-                    FXCollections.sort(foodItems, Comparator.comparingDouble(FoodItem::getCalories).reversed());
-                    break;
-                case "Protein":
-                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getProtein).reversed());
-                    FXCollections.sort(foodItems, Comparator.comparingDouble(FoodItem::getProtein).reversed());
-                    break;
-                case "Carbs":
-                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getCarbs).reversed());
-                    FXCollections.sort(foodItems, Comparator.comparingDouble(FoodItem::getCarbs).reversed());
-                    break;
-                case "Fats":
-                    FXCollections.sort(meals, Comparator.comparingDouble(Meal::getFats).reversed());
-                    FXCollections.sort(foodItems, Comparator.comparingDouble(FoodItem::getFats).reversed());
-                    break;
-                default:
-                    meals = Model.getInstance().getIdMeals(Model.getInstance().dayMealIds(date));
-                    foodItems = Model.getInstance().getIdFoodItems(Model.getInstance().dayFoodItemIds(date));
-                    break;
-            }
-
-            day_meals_table.setItems(meals);
-            day_items_table.setItems(foodItems);
+            return;
         }
+        String choice = day_sort_comboBox.getValue();
+        FXCollections.sort(day_meals_table.getItems(), getMealComparator(choice));
+        FXCollections.sort(day_items_table.getItems(), getFoodItemComparator(choice));
     }
 
+    private Comparator<Meal> getMealComparator(String criteria) {
+        return switch (criteria) {
+            case "Name" -> Comparator.comparing(Meal::getName).reversed();
+            case "Calories" -> Comparator.comparingDouble(Meal::getCalories).reversed();
+            case "Protein" -> Comparator.comparingDouble(Meal::getProtein).reversed();
+            case "Carbs" -> Comparator.comparingDouble(Meal::getCarbs).reversed();
+            case "Fats" -> Comparator.comparingDouble(Meal::getFats).reversed();
+            default -> (a, b) -> 0;
+        };
+    }
 
+    private Comparator<FoodType> getFoodTypeComparator(String criteria) {
+        return switch (criteria) {
+            case "Name" -> Comparator.comparing(FoodType::getName).reversed();
+            case "Calories" -> Comparator.comparingDouble(FoodType::getCalories).reversed();
+            case "Protein" -> Comparator.comparingDouble(FoodType::getProtein).reversed();
+            case "Carbs" -> Comparator.comparingDouble(FoodType::getCarbs).reversed();
+            case "Fats" -> Comparator.comparingDouble(FoodType::getFats).reversed();
+            default -> (a, b) -> 0;
+        };
+    }
+
+    private Comparator<FoodItem> getFoodItemComparator(String criteria) {
+        return switch (criteria) {
+            case "Name" -> Comparator.comparing(FoodItem::getName).reversed();
+            case "Calories" -> Comparator.comparingDouble(FoodItem::getCalories).reversed();
+            case "Protein" -> Comparator.comparingDouble(FoodItem::getProtein).reversed();
+            case "Carbs" -> Comparator.comparingDouble(FoodItem::getCarbs).reversed();
+            case "Fats" -> Comparator.comparingDouble(FoodItem::getFats).reversed();
+            default -> (a, b) -> 0;
+        };
+    }
 }

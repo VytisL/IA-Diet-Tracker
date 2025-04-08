@@ -2,7 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -10,8 +12,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.MenuItem?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.benedict.DietTracker.Controllers.CreateMealWindowController">
    <children>
@@ -51,6 +51,6 @@
             <Button fx:id="save_meal_item_btn" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Save" />
          </children>
       </HBox>
-      <TextField fx:id="meal_name_field" layoutX="15.0" layoutY="50.0" prefHeight="25.0" prefWidth="571.0" />
+      <TextField fx:id="meal_name_field" layoutX="15.0" layoutY="50.0" prefHeight="25.0" prefWidth="571.0" promptText="Enter name" />
    </children>
 </Pane>

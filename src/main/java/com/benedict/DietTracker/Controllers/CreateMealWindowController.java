@@ -89,7 +89,6 @@ public class CreateMealWindowController implements Initializable {
             }
 
             SimpleObjectProperty<FoodType> foodType = new SimpleObjectProperty(meal_select_food_type_box.getValue());
-            System.out.println(foodType.getName());
             double portion = Double.parseDouble(meal_portion_field.getText());
             FoodItem foodItem = new FoodItem(foodType, portion);
             foodItems.add(foodItem);

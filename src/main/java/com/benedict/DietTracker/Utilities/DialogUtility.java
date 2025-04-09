@@ -40,14 +40,20 @@ public class DialogUtility {
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(dialogButton -> {
-            if(dialogButton == saveButtonType){
-                foodType.setName(nameField.getText().trim());
-                foodType.setCalories(Double.parseDouble(caloriesField.getText().trim()));
-                foodType.setProtein(Double.parseDouble(proteinField.getText().trim()));
-                foodType.setCarbs(Double.parseDouble(carbsField.getText().trim()));
-                foodType.setFats(Double.parseDouble(fatsField.getText().trim()));
+            try {
+                if (dialogButton == saveButtonType) {
+                    foodType.setName(nameField.getText().trim());
+                    foodType.setCalories(Double.parseDouble(caloriesField.getText().trim()));
+                    foodType.setProtein(Double.parseDouble(proteinField.getText().trim()));
+                    foodType.setCarbs(Double.parseDouble(carbsField.getText().trim()));
+                    foodType.setFats(Double.parseDouble(fatsField.getText().trim()));
+                }
+                return foodType;
+            }catch (Exception E) {
+                AlertUtility.displayError("Invalid data");
+                return foodType;
             }
-            return foodType;
+
         });
 
         return dialog.showAndWait();

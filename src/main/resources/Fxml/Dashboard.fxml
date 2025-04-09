@@ -32,7 +32,7 @@
                                     <contextMenu>
                                         <ContextMenu>
                                             <items>
-                                                <MenuItem fx:id="delete_meal_day_btn" text="Unspecified Action" />
+                                                <MenuItem fx:id="delete_meal_day_btn" text="Remove Meal" />
                                             </items>
                                         </ContextMenu>
                                     </contextMenu>
@@ -56,7 +56,7 @@
                                     <contextMenu>
                                         <ContextMenu>
                                             <items>
-                                                <MenuItem fx:id="delete_item_day_btn" text="Unspecified Action" />
+                                                <MenuItem fx:id="delete_item_day_btn" text="Remove FoodItem" />
                                             </items>
                                         </ContextMenu>
                                     </contextMenu>

@@ -109,16 +109,17 @@ public class DayDAO {
     }
 
     public void removeFoodItemFromDay(int foodItem_id) {
-        String sql = "DELETE FROM Days WHERE foodItem_id = ? ORDER BY ROWID LIMIT 1";
+        String sql = "DELETE FROM Days WHERE ROWID IN " +
+                "(SELECT ROWID FROM Days WHERE foodItem_id = ? LIMIT 1)";
         try(PreparedStatement stmt = this.conn.prepareStatement(sql)) {
             stmt.setInt(1, foodItem_id);
             int rowsAffected = stmt.executeUpdate();
 
             if(rowsAffected > 0){
-                System.out.println("FoodItem successfully remove from Day");
+                System.out.println("FoodItem successfully removed from Day");
             } else {
                 System.out.println("No FoodItem was found with id " + foodItem_id);
-            };
+            }
         } catch (SQLException e){
             System.out.println("Error removing FoodItem from day with id " + foodItem_id);
             e.printStackTrace();

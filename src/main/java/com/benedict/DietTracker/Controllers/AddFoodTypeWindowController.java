@@ -61,20 +61,13 @@ public class AddFoodTypeWindowController implements Initializable {
                 }
                 Model.getInstance().createFoodType(name, calories, protein, carbs, fats);
                 AlertUtility.displayConfirmation("Food Type created successfuly");
-                emptyFields();
+
             } catch (Exception E) {
                 AlertUtility.displayError("Invalid data");
-                emptyFields();
+
             }
         }
     }
 
 
-    private void emptyFields() {
-        food_type_name_field.setText(null);
-        calories_field.setText(null);
-        protein_field.setText(null);
-        carbs_field.setText(null);
-        fats_field.setText(null);
-    }
 }

@@ -94,6 +94,11 @@ public class DashboardController implements Initializable {
         delete_item_day_btn.setOnAction(event -> onDeleteDayItem());
         change_date_btn.setOnAction(event -> onChangeDate());
 
+        LocalDate today = LocalDate.now();
+        date_picker.setValue(today);
+        date = today.toString();
+        onChangeDate();
+
         setSortComboBoxValues();
         initTypesTableColumns();
         setRowFactoryForFoodTypesTable();
@@ -156,6 +161,9 @@ public class DashboardController implements Initializable {
 
     private void loadFoodTypeData() {
         ObservableList<FoodType> foodTypes = Model.getInstance().getFoodTypes();
+        for(int i = 0; i < foodTypes.size(); i++){
+            System.out.println(foodTypes.get(i).getName());
+        }
         food_types_table.setItems(foodTypes);
     }
 

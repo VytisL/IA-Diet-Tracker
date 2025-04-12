@@ -114,6 +114,15 @@ public class CreateMealWindowController implements Initializable {
         meal_portion_field.setText(null);
     }
 
+    private void emptyAllFields(){
+        meal_select_food_type_box.setValue(null);
+        meal_portion_field.setText(null);
+        meal_name_field.setText(null);
+        foodItems.clear();
+        meal_items_table.setItems(foodItems);
+    }
+
+
     public void onCreateMeal() {
 
         if(meal_name_field.getText()==null || foodItems.isEmpty()){
@@ -128,6 +137,7 @@ public class CreateMealWindowController implements Initializable {
                 portions.add(foodItems.get(i).getPortion());
             }
             Model.getInstance().createMeal(name, foodTypes, portions);
+            emptyAllFields();
             onCancel();
         }
 

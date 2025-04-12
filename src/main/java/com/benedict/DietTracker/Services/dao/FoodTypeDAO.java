@@ -89,7 +89,14 @@ public class FoodTypeDAO {
 
     public void delete(int id) {
         String sql = "DELETE FROM FoodTypes WHERE id = ?";
-        try(PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+        String deleteItemsSql = "DELETE FROM FoodItems WHERE foodTypeId = ?";
+
+        try(PreparedStatement stmt = this.conn.prepareStatement(sql);
+            PreparedStatement itemsStmt = this.conn.prepareStatement(deleteItemsSql)) {
+
+            itemsStmt.setInt(1, id);
+            itemsStmt.executeUpdate();
+
             stmt.setInt(1, id);
             int rowsAffected = stmt.executeUpdate();
             if(rowsAffected > 0){

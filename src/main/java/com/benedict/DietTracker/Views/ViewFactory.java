@@ -66,13 +66,13 @@ public class ViewFactory {
 
 
     public Pane returnToMainWindow() {
-        if(dashboard == null){
+
             try {
                 dashboard = new FXMLLoader(getClass().getResource("/Fxml/Dashboard.fxml")).load();
             }catch (Exception e){
                 System.out.println(e);
             }
-        }
+
         return dashboard;
     }
 

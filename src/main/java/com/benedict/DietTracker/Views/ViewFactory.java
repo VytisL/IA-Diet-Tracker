@@ -21,58 +21,48 @@ public class ViewFactory {
 
 
     public Pane getAddFoodTypeView() {
-        if(addFoodTypeView == null){
             try {
                 addFoodTypeView = new FXMLLoader(getClass().getResource("/Fxml/AddFoodTypeWindow.fxml")).load();
             }catch (Exception e){
                 System.out.println(e);
             }
-        }
         return addFoodTypeView;
     }
 
     public Pane getAddFoodItemIntoDayView() {
-        if(addFoodItemIntoDayView == null){
             try {
                 addFoodItemIntoDayView = new FXMLLoader(getClass().getResource("/Fxml/AddFoodItemIntoDayWindow.fxml")).load();
             }catch (Exception e){
                 System.out.println(e);
             }
-        }
         return addFoodItemIntoDayView;
     }
 
     public Pane getAddMealIntoDayView() {
-        if(addMealIntoDayView == null){
             try {
                 addMealIntoDayView = new FXMLLoader(getClass().getResource("/Fxml/AddMealIntoDayWindow.fxml")).load();
             }catch (Exception e){
                 System.out.println(e);
             }
-        }
         return addMealIntoDayView;
     }
 
     public Pane getCreateMealView() {
-        if(CreateMealView == null){
             try {
                 CreateMealView = new FXMLLoader(getClass().getResource("/Fxml/CreateMealWindow.fxml")).load();
             }catch (Exception e){
                 System.out.println(e);
             }
-        }
         return CreateMealView;
     }
 
 
     public Pane returnToMainWindow() {
-
             try {
                 dashboard = new FXMLLoader(getClass().getResource("/Fxml/Dashboard.fxml")).load();
             }catch (Exception e){
                 System.out.println(e);
             }
-
         return dashboard;
     }
 
